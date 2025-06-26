@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PicoCTF Challenges - Hints & Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/style.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+  <h1 class="mb-4 text-center">PicoCTF Challenges - Hints & Solutions</h1>
+
+  <div class="card challenge-card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">Cookie Monster Secret Recipe <span class="badge bg-success">Web Exploitation - Easy</span></h5>
+      <p class="card-text">Use DevTools in the browser (F12) → Application tab → check cookies for a Base64-encoded value. Decode it to find the flag.</p>
+      
+      <ul class="nav nav-tabs" id="challengeTab1" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="hints-tab1" type="button">Hints</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="solution-tab1" type="button">Solution</button>
+        </li>
+      </ul>
+
+      <div class="tab-content mt-3" id="challengeTabContent1">
+        <div class="tab-pane fade" id="hints1">
+          <div class="accordion" id="hintAccordion1">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint1-collapse1">
+                  Hint 1: How would you inspect a web page?
+                </button>
+              </h2>
+              <div id="hint1-collapse1" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  You can use Developer Tools in your browser. Try pressing <strong>F12</strong> or right-click and select "Inspect".
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint1-collapse2">
+                  Hint 2: Can you see through the cookies?
+                </button>
+              </h2>
+              <div id="hint1-collapse2" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Check the "Application" tab in DevTools and look at the cookies for the website.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint1-collapse3">
+                  Hint 3: Does anything look encoded?
+                </button>
+              </h2>
+              <div id="hint1-collapse3" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  The cookie value may look suspicious or encoded. Try decoding it using <a href="https://www.base64decode.org/" target="_blank">Base64 Decoder</a>.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="solution1">
+          <strong>Solution:</strong>
+          <p>Open DevTools → Application tab → Cookies → Copy the encoded value → Decode using Base64 decoder → The flag is revealed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Head Dump <span class="badge bg-success">Web Exploitation - Easy</span></h5>
+    <p class="card-text">
+      Explore the hidden functionalities of a web application. Sometimes developers leave helpful information exposed unintentionally.
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab2" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab2" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab2" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent2">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints2">
+        <div class="accordion" id="hintAccordion2">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint2-collapse1">
+                Hint 1: Where do websites often describe their API functionality?
+              </button>
+            </h2>
+            <div id="hint2-collapse1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Many web apps use API documentation tools like Swagger. Check the page source or explore links to find anything related to <strong>API Docs</strong>.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint2-collapse2">
+                Hint 2: Do you see a link to something like <code>/api-docs</code>?
+              </button>
+            </h2>
+            <div id="hint2-collapse2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Inspect the HTML or explore the site manually. If you find <code>/api-docs</code>, visit it. It usually provides interactive documentation where you can test API calls directly.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint2-collapse3">
+                Hint 3: Which endpoint sounds suspicious for revealing sensitive information?
+              </button>
+            </h2>
+            <div id="hint2-collapse3" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Look for an endpoint named <code>/heapdump</code> or similar. A <strong>heapdump</strong> often contains memory data from the server, and might accidentally reveal sensitive information like flags.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint2-collapse4">
+                Hint 4: How do you extract useful data from a heapdump file?
+              </button>
+            </h2>
+            <div id="hint2-collapse4" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Once you download the heapdump file, search through its contents for keywords like <code>picoCTF</code>. You can use terminal tools like <code>grep</code> for this purpose.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution2">
+        <strong>Solution:</strong>
+        <p>
+          1. Open the webpage and inspect the source code or links.<br>
+          2. You should notice a link to <code>/api-docs</code>. This is an API documentation interface powered by Swagger.<br>
+          3. In the documentation, under the <strong>Diagnosing</strong> section, you will find a <code>/heapdump</code> endpoint.<br>
+          4. Click <strong>Try it out</strong> and then <strong>Execute</strong> to call the endpoint.<br>
+          5. You will get a download link for a file containing memory dump information.<br>
+          6. Download the file and search for the flag using:<br>
+          <pre>$ cat heapdump.heapsnapshot | grep picoCTF</pre>
+          7. The flag will appear within the contents of that file.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Blame Game <span class="badge bg-success">General Skills - Easy</span></h5>
+    <p class="card-text">
+      You've been handed a code repository. Can you investigate its history and find out who's responsible for leaking the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab4" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab4" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab4" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent4">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints4">
+        <div class="accordion" id="hintAccordion4">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint4-collapse1">
+                Hint 1: What command shows you the history of a git repository?
+              </button>
+            </h2>
+            <div id="hint4-collapse1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Use <code>git log</code> to see previous commits and who made them. Sometimes, the flag hides in commit messages or author names.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint4-collapse2">
+                Hint 2: What if the project has too many files to check all at once?
+              </button>
+            </h2>
+            <div id="hint4-collapse2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                You can focus on a specific file using <code>git log &lt;filename&gt;</code>. Check the files that seem relevant to the challenge.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint4-collapse3">
+                Hint 3: Which file should you investigate?
+              </button>
+            </h2>
+            <div id="hint4-collapse3" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                There's a file called <code>message.py</code> in the project. Use <code>git log message.py</code> to check its history specifically.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint4-collapse4">
+                Hint 4: Where exactly might the flag be hidden?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint4-collapse4">
+              <div class="accordion-body">
+                Pay close attention to the author's name or email in the commit history. Sometimes the flag is hidden there!
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution4">
+        <strong>Solution:</strong>
+        <p>
+          1. Download and extract the provided project:<br>
+          <pre>$ wget https://artifacts.picoctf.net/c_titan/74/challenge.zip<br>$ unzip challenge.zip<br>$ cd drop-in</pre>
+          2. Run:<br>
+          <pre>$ git log message.py</pre>
+          3. You'll see commit history specific to <code>message.py</code>.<br>
+          4. The author of a specific commit contains the flag in their name or email.<br><br>
+          ✅ The flag is: <code>picoCTF{@sk_th3_1nt3rn_ea3...}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Interencdec <span class="badge bg-success">Cryptography - Easy</span></h5>
+    <p class="card-text">
+      The flag has been encoded multiple times using different methods. Can you peel back the layers and reveal the hidden flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab7" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab7" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab7" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent7">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints7">
+        <div class="accordion" id="hintAccordion7">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint7-collapse1">
+                Hint 1: What does the file you downloaded contain?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint7-collapse1">
+              <div class="accordion-body">
+                The <code>enc_flag</code> file contains encoded text. Use <code>cat enc_flag</code> to view its contents.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint7-collapse2">
+                Hint 2: What encoding does the output look like?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint7-collapse2">
+              <div class="accordion-body">
+                Notice the trailing <code>=</code> symbols — that's a common giveaway for Base64 encoding. Try decoding it!
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint7-collapse3">
+                Hint 3: Is it only encoded once?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint7-collapse3">
+              <div class="accordion-body">
+                After the first decode, you get another Base64 string — this is a double-encoded flag. You'll need to decode it again.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint7-collapse4">
+                Hint 4: What does the final output look like?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint7-collapse4">
+              <div class="accordion-body">
+                After double decoding, the output resembles a flag format but it's scrambled. This suggests a rotation cipher like ROT13 was applied. Try decoding that!
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution7">
+        <strong>Solution:</strong>
+        <p>
+          1. Download and view the encoded flag:<br>
+          <pre>$ wget https://artifacts.picoctf.net/c_titan/3/enc_flag<br>$ cat enc_flag</pre>
+          2. The string looks like Base64. Decode it using CyberChef or:<br>
+          <pre>$ cat enc_flag | base64 -d</pre>
+          3. The output is another Base64 string. Decode it again:<br>
+          <pre>$ echo &lt;second string&gt; | base64 -d</pre>
+          4. Now, apply a ROT13 cipher (use CyberChef's ROT13 Brute Force) to reveal the flag.<br><br>
+          ✅ The flag is: <code>picoCTF{caesar_d3cr9pt3d_b20...}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Vault-Door-Training <span class="badge bg-success">Reverse Engineering - Easy</span></h5>
+    <p class="card-text">
+      A digital vault door stands in your way. The source code might hold the secret to bypassing it. Can you spot the password and claim the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab9" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab9" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab9" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent9">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints9">
+        <div class="accordion" id="hintAccordion9">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint9-collapse1">
+                Hint 1: Do you have access to the program's source code?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint9-collapse1">
+              <div class="accordion-body">
+                Yes! The source code is provided. This is a classic reverse engineering challenge where reading the code is key.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint9-collapse2">
+                Hint 2: Where in the code might the password be hidden?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint9-collapse2">
+              <div class="accordion-body">
+                Search for a function like <code>checkPassword()</code>. This is usually where the program compares your input to the correct password.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint9-collapse3">
+                Hint 3: Is the password hardcoded?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint9-collapse3">
+              <div class="accordion-body">
+                In simple challenges like this, the password is often hardcoded directly into the <code>checkPassword()</code> function. Find and use it!
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution9">
+        <strong>Solution:</strong>
+        <p>
+          1. Review the provided Java source code.<br>
+          2. Locate the <code>checkPassword()</code> function. It contains a line like:<br>
+          <pre>return password.equals("w4rm1ng_Up_w1tH_jAv4_87f51143e4b");</pre>
+          3. This is the password you need.<br>
+          4. Run the program and input this exact string when prompted.<br>
+          5. The flag will be displayed upon successful verification.<br><br>
+          ✅ The flag is: <code>picoCTF{w4rm1ng_Up_w1tH_jAv4_87f51143e4b}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">unpackme.py <span class="badge bg-success">Reverse Engineering - Easy</span></h5>
+    <p class="card-text">
+      You’ve been given a Python script, but the flag is hidden inside. With a simple tweak, you can unpack its secret. Can you reveal the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab11" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab11" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab11" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent11">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints11">
+        <div class="accordion" id="hintAccordion11">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse1">
+                Hint 1: Did you read the Python source code carefully?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint11-collapse1">
+              <div class="accordion-body">
+                The provided script contains logic that hides the flag using encryption or encoding. Reading the source code will reveal where the flag is handled.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse2">
+                Hint 2: Is the decrypted flag being shown or executed?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint11-collapse2">
+              <div class="accordion-body">
+                Instead of printing the flag, the decrypted content is executed using <code>exec()</code>. You can modify this to display the flag instead.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse3">
+                Hint 3: What’s the safe way to see the flag?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint11-collapse3">
+              <div class="accordion-body">
+                Replace <code>exec(plain.decode())</code> with <code>print(plain.decode())</code>. This way, the decrypted flag is displayed instead of executed.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution11">
+        <strong>Solution:</strong>
+        <p>
+          1. Open <code>unpackme.py</code> in your favorite text editor.<br>
+          2. Find the line:<br>
+          <pre>exec(plain.decode())</pre>
+          3. Replace it with:<br>
+          <pre>print(plain.decode())</pre>
+          4. Run the modified script:<br>
+          <pre>$ python unpackme.py</pre>
+          5. The decrypted flag will be printed to your terminal.<br><br>
+          ✅ The flag is revealed by printing the decrypted payload.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">MatchTheRegex <span class="badge bg-warning text-dark">Web Exploitation - Medium</span></h5>
+    <p class="card-text">
+      You are asked to submit input on a webpage, but only specific patterns will reveal the flag. Can you figure out what input satisfies the hidden requirements?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab3" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab3" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab3" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent3">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints3">
+        <div class="accordion" id="hintAccordion3">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint3-collapse1">
+                Hint 1: Have you looked at the page source?
+              </button>
+            </h2>
+            <div id="hint3-collapse1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Right-click the page and choose <strong>View Page Source</strong> or press <code>Ctrl+U</code>. Hidden information often lurks there.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint3-collapse2">
+                Hint 2: Is there any JavaScript that processes your input?
+              </button>
+            </h2>
+            <div id="hint3-collapse2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                Look for a <code>send_request()</code> function or similar. That might show you how your input is being checked before sending it to the server.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint3-collapse3">
+                Hint 3: What is a regular expression, and can you spot one?
+              </button>
+            </h2>
+            <div id="hint3-collapse3" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                A regular expression defines a specific pattern your input must follow. In this case, within the source, you’ll find a commented regex like <code>^p.....F</code>. Understand what this means.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint3-collapse4">
+                Hint 4: What input matches <code>^p.....F</code>?
+              </button>
+            </h2>
+            <div id="hint3-collapse4" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                The <code>^</code> means it must start with 'p', followed by exactly five characters of any kind (<code>.</code>), ending with 'F'. Your input should match that to get the flag.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution3">
+        <strong>Solution:</strong>
+        <p>
+          1. View the page source. You'll see a form and a <code>send_request()</code> JavaScript function.<br>
+          2. The function sends your input to the backend, but there's a comment showing the expected pattern: <code>^p.....F</code>.<br>
+          3. This means your input must:<br>
+          - Start with <code>p</code><br>
+          - Be followed by exactly 5 characters (any characters)<br>
+          - End with <code>F</code><br><br>
+          4. Example valid input: <code>p12345F</code><br>
+          5. Submit such an input, and the server will return the flag via an alert or message.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Permissions <span class="badge bg-warning text-dark">General Skills - Medium</span></h5>
+    <p class="card-text">
+      You find yourself in a restricted environment with limited access. Can you leverage system permissions to reveal the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab5" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab5" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab5" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent5">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints5">
+        <div class="accordion" id="hintAccordion5">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint5-collapse1">
+                Hint 1: What directory often holds sensitive files for the root user?
+              </button>
+            </h2>
+            <div id="hint5-collapse1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                The <code>/root</code> directory belongs to the root user. Standard users can't access its contents directly.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint5-collapse2">
+                Hint 2: Is there any command you're allowed to run as root?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint5-collapse2">
+              <div class="accordion-body">
+                Check your <code>sudo</code> privileges using <code>sudo -l</code>. It shows which commands you can run with elevated permissions.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint5-collapse3">
+                Hint 3: Can you use an editor to explore restricted areas?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint5-collapse3">
+              <div class="accordion-body">
+                If <code>vi</code> or <code>vim</code> is allowed with <code>sudo</code>, you can browse files and directories, even those restricted to root.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint5-collapse4">
+                Hint 4: Where exactly might the flag be hidden?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint5-collapse4">
+              <div class="accordion-body">
+                Once inside <code>/root</code> with <code>sudo vi</code>, look for a file like <code>.flag.txt</code> and open it to reveal the flag.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution5">
+        <strong>Solution:</strong>
+        <p>
+          1. Run <code>sudo -l</code> to check available commands.<br>
+          2. If <code>/usr/bin/vi</code> is listed, you can use:<br>
+          <pre>$ sudo vi /root</pre>
+          3. In <code>vi</code>, navigate to the <code>.flag.txt</code> file in <code>/root</code> and open it.<br>
+          4. The contents of the file reveal the flag.<br><br>
+          ✅ The flag is inside <code>/root/.flag.txt</code>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Serpentine <span class="badge bg-warning text-dark">General Skills - Medium</span></h5>
+    <p class="card-text">
+      The program you’re running claims the flag is missing, but is it really gone? Maybe a slight change to the code could reveal the truth.
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab6" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab6" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab6" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent6">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints6">
+        <div class="accordion" id="hintAccordion6">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint6-collapse1">
+                Hint 1: Did you inspect the source code of the program?
+              </button>
+            </h2>
+            <div id="hint6-collapse1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                If the program is written in Python, you can simply open the source code and check how it behaves. Look for interesting functions.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint6-collapse2">
+                Hint 2: Is there a function that prints the flag?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint6-collapse2">
+              <div class="accordion-body">
+                Yes! Look for a function called <code>print_flag()</code>. The flag is there, but it's not being called in the current code.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint6-collapse3">
+                Hint 3: What function is being executed when the program runs?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint6-collapse3">
+              <div class="accordion-body">
+                Check the block that starts with <code>if __name__ == \"__main__\":</code>. It's currently calling the <code>main()</code> function, not <code>print_flag()</code>.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint6-collapse4">
+                Hint 4: How can you make the program reveal the flag?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint6-collapse4">
+              <div class="accordion-body">
+                Simply modify the source code to replace the call to <code>main()</code> with <code>print_flag()</code> and then run the program again.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution6">
+        <strong>Solution:</strong>
+        <p>
+          1. Open the provided Python source code.<br>
+          2. Locate the end of the file where it says:<br>
+          <pre>if __name__ == "__main__":<br>    main()</pre>
+          3. Replace that with:<br>
+          <pre>if __name__ == "__main__":<br>    print_flag()</pre>
+          4. Run the modified script:<br>
+          <pre>$ python serpentine.py</pre>
+          5. The flag will be printed to the terminal.<br><br>
+          ✅ The flag is revealed when the <code>print_flag()</code> function is executed.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Substitution0 <span class="badge bg-warning text-dark">Cryptography - Medium</span></h5>
+    <p class="card-text">
+      Someone encrypted the message using a simple substitution cipher. Can you crack the key and reveal the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab8" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab8" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab8" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent8">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints8">
+        <div class="accordion" id="hintAccordion8">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint8-collapse1">
+                Hint 1: What type of cipher hides letters by replacing them with others?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint8-collapse1">
+              <div class="accordion-body">
+                A <strong>substitution cipher</strong> replaces each letter with another. If you crack the key, you can decode the message.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint8-collapse2">
+                Hint 2: How can you quickly solve such a cipher without guessing the whole key?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint8-collapse2">
+              <div class="accordion-body">
+                Online tools like <a href="https://www.boxentriq.com/code-breaking/simple-substitution-cipher" target="_blank">Boxentriq Substitution Solver</a> let you paste the text and auto-solve using frequency analysis and pattern recognition.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint8-collapse3">
+                Hint 3: What is your goal after decrypting the message?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint8-collapse3">
+              <div class="accordion-body">
+                Look for the <code>picoCTF{...}</code> flag format in the decrypted message. That's your final answer.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution8">
+        <strong>Solution:</strong>
+        <p>
+          1. Copy the encrypted message text provided in the challenge.<br>
+          2. Go to <a href="https://www.boxentriq.com/code-breaking/simple-substitution-cipher" target="_blank">Boxentriq Substitution Cipher Solver</a>.<br>
+          3. Paste the message and let the solver work. You can manually adjust mappings if needed.<br>
+          4. After decryption, locate the flag in the <code>picoCTF{...}</code> format.<br><br>
+          ✅ Example flag: <code>picoCTF{5UB5717U710N_3V0LU710N_59533A2E}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Reverse <span class="badge bg-warning text-dark">Reverse Engineering - Medium</span></h5>
+    <p class="card-text">
+      You’ve been given a mysterious executable file. Can you dig through its contents to reveal the hidden flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab10" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab10" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab10" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent10">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints10">
+        <div class="accordion" id="hintAccordion10">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint10-collapse1">
+                Hint 1: What basic tool helps inspect binary files for readable strings?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint10-collapse1">
+              <div class="accordion-body">
+                The <code>strings</code> command extracts printable text from binary files. It’s a great first step when dealing with executables.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint10-collapse2">
+                Hint 2: What should you look for in the output of <code>strings</code>?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint10-collapse2">
+              <div class="accordion-body">
+                Search for the flag format, usually <code>picoCTF{...}</code>. If it's present, you've likely found your answer.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint10-collapse3">
+                Hint 3: What if the flag is obfuscated or hidden deeper?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint10-collapse3">
+              <div class="accordion-body">
+                In more complex challenges, you might need to use tools like <code>Ghidra</code>, <code>IDA</code>, or <code>GDB</code>. But for this one, <code>strings</code> is enough.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution10">
+        <strong>Solution:</strong>
+        <p>
+          1. Run <code>strings</code> on the provided executable:<br>
+          <pre>$ strings -t x ret | grep pico</pre>
+          2. The output will show the flag embedded in the binary.<br>
+          3. Example output:<br>
+          <pre>2048 Password correct, please see flag: picoCTF{...}</pre>
+          4. That’s your flag.<br><br>
+          ✅ The flag is present in the <code>strings</code> output.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Ph4nt0m 1ntrud3r <span class="badge bg-warning text-dark">Forensics - Medium</span></h5>
+    <p class="card-text">
+      There’s been an intrusion, but the attacker was stealthy. Can you analyze the evidence and uncover the flag hidden in the shadows?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab12" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab12" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab12" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent12">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints12">
+        <div class="accordion" id="hintAccordion12">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse1">
+                Hint 1: What type of file were you given?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint12-collapse1">
+              <div class="accordion-body">
+                You were provided a memory dump file. These often contain remnants of processes, passwords, or even flags that were in memory at the time.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse2">
+                Hint 2: How can you search a memory dump for readable information?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint12-collapse2">
+              <div class="accordion-body">
+                Use the <code>strings</code> command to extract printable text from the dump. Look for anything resembling <code>picoCTF{...}</code>.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse3">
+                Hint 3: What if there are too many strings?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint12-collapse3">
+              <div class="accordion-body">
+                You can filter the output with <code>grep</code> to search specifically for the flag format:<br>
+                <pre>$ strings memory_dump | grep pico</pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution12">
+        <strong>Solution:</strong>
+        <p>
+          1. Run <code>strings</code> on the memory dump file:<br>
+          <pre>$ strings memory_dump | grep pico</pre>
+          2. The flag will appear in the output.<br>
+          3. Example output:<br>
+          <pre>... picoCTF{m3m0ry_r3s1du3_1s_n0t_s3cur3} ...</pre>
+          4. That’s your flag.<br><br>
+          ✅ The flag is hidden within printable strings extracted from the memory dump.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">MacroHard WeakEdge <span class="badge bg-warning text-dark">Forensics - Medium</span></h5>
+    <p class="card-text">
+      You’ve been handed a suspicious browser profile. Could it contain evidence of a flag hidden within cached files or history? It’s time to investigate.
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab13" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab13" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab13" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent13">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints13">
+        <div class="accordion" id="hintAccordion13">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint13-collapse1">
+                Hint 1: What exactly is a browser profile?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint13-collapse1">
+              <div class="accordion-body">
+                A browser profile contains a user's cached files, history, cookies, saved passwords, and other browsing data. It can hold a lot of hidden information.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint13-collapse2">
+                Hint 2: What specific files in a profile could hold valuable clues?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint13-collapse2">
+              <div class="accordion-body">
+                Look inside <code>Cache</code>, <code>History</code>, <code>Local Storage</code>, and <code>Cookies</code>. Cached pages or history entries often hide useful information.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint13-collapse3">
+                Hint 3: How can you view cached files easily?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint13-collapse3">
+              <div class="accordion-body">
+                You can use tools like <a href="https://www.nirsoft.net/utils/chrome_cache_view.html" target="_blank">ChromeCacheView</a> or simply browse the <code>Cache</code> directory for files containing readable content or the flag.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint13-collapse4">
+                Hint 4: Where is the flag specifically hidden?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint13-collapse4">
+              <div class="accordion-body">
+                In this challenge, the flag is hidden within cached files. Look for files containing text that resembles the flag format: <code>picoCTF{...}</code>.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution13">
+        <strong>Solution:</strong>
+        <p>
+          1. Explore the provided browser profile directory.<br>
+          2. Navigate to the <code>Cache</code> folder.<br>
+          3. Use <code>strings</code> to extract readable text from cached files:<br>
+          <pre>$ strings * | grep pico</pre>
+          4. Alternatively, use a graphical tool like ChromeCacheView to inspect cache entries.<br>
+          5. The flag will appear hidden in one of the cached files.<br><br>
+          ✅ Example flag format: <code>picoCTF{c4ch3_4na1y515_m4tt3r5}</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Pie Time <span class="badge bg-warning text-dark">Binary Exploitation - Medium</span></h5>
+    <p class="card-text">
+      You’ve come across a binary using a security technique known as PIE (Position Independent Executable). Can you overcome it and find the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab14" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab14" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab14" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent14">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints14">
+        <div class="accordion" id="hintAccordion14">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse1">
+                Hint 1: What does PIE mean?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse1">
+              <div class="accordion-body">
+                PIE means the memory addresses within the binary are randomized each time it's run. This makes exploiting it trickier, but not impossible.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse2">
+                Hint 2: How can you figure out addresses when PIE is enabled?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse2">
+              <div class="accordion-body">
+                You can leak addresses at runtime using debugging tools like <code>GDB</code>. Once you know the base address, you can calculate the locations of functions.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse3">
+                Hint 3: How do you confirm the binary uses PIE?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse3">
+              <div class="accordion-body">
+                Run <code>checksec</code> on the binary:<br>
+                <pre>$ checksec pie_time</pre>
+                You’ll see that PIE is enabled if the binary is position independent.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse4">
+                Hint 4: What tools can help you exploit the binary?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse4">
+              <div class="accordion-body">
+                Use <code>GDB</code> with <code>pwndbg</code> or <code>gef</code> to analyze memory, leak addresses, and construct your exploit. You may need to calculate the offset for your payload.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution14">
+        <strong>Solution:</strong>
+        <p>
+          1. Run <code>checksec pie_time</code> to confirm PIE is enabled.<br>
+          2. Open the binary with GDB:<br>
+          <pre>$ gdb pie_time</pre>
+          3. Use a format string vulnerability to leak an address at runtime.<br>
+          4. Calculate the PIE base by subtracting known offsets from the leaked address.<br>
+          5. With the base address, compute the location of useful functions or flags.<br>
+          6. Construct your exploit payload accordingly.<br>
+          7. Upon successful exploitation, the binary will reveal the flag.<br><br>
+          ✅ The flag is revealed after exploiting the PIE-protected binary using leaked addresses.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Stonks <span class="badge bg-warning text-dark">Binary Exploitation - Medium</span></h5>
+    <p class="card-text">
+      The stock market can be manipulated, but can you manipulate this binary to reveal the flag? A classic format string bug is hidden in plain sight.
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab15" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab15" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab15" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent15">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints15">
+        <div class="accordion" id="hintAccordion15">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint15-collapse1">
+                Hint 1: What is a format string vulnerability?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint15-collapse1">
+              <div class="accordion-body">
+                A format string vulnerability occurs when user input is passed to <code>printf()</code> or similar functions without proper sanitization. This can allow an attacker to leak memory addresses or manipulate memory.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint15-collapse2">
+                Hint 2: How can you leak memory using a format string bug?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint15-collapse2">
+              <div class="accordion-body">
+                You can provide input like <code>%p %p %p %p</code> to print memory addresses from the stack. This helps leak useful information, such as function pointers or PIE base addresses.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint15-collapse3">
+                Hint 3: How can this help you find the flag?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint15-collapse3">
+              <div class="accordion-body">
+                Leaking addresses can reveal the memory layout. In some cases, the flag is stored in memory, and using <code>%s</code> with the right leaked pointer can print the flag directly.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution15">
+        <strong>Solution:</strong>
+        <p>
+          1. Connect to the provided binary locally or remotely:<br>
+          <pre>$ nc mercury.picoctf.net 56145</pre>
+          2. At the input prompt, enter a payload like:<br>
+          <pre>%p %p %p %p %p %p</pre>
+          3. The program will print memory addresses from the stack.<br>
+          4. With careful trial and error, adjust your payload to use <code>%s</code> at the correct position, printing a memory address that holds the flag.<br>
+          5. Example payload:<br>
+          <pre>%7$s</pre>
+          6. If successful, the flag will be printed to the terminal.<br><br>
+          ✅ The flag is revealed by exploiting a format string vulnerability to leak memory and print its contents.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Elements <span class="badge bg-danger">Web Exploitation - Hard</span> </h5>
+    <p class="card-text">
+      You’ve received the source code for a seemingly normal webpage. But things aren't always as they seem. Search through the provided files and uncover the hidden flag!
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab16" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab16" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab16" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent16">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints16">
+        <div class="accordion" id="hintAccordion16">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint16-collapse1">
+                Hint 1: Have you extracted the provided <code> elements.tar.gz </code> file?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint16-collapse1">
+              <div class="accordion-body">
+                First, extract the archive:<br>
+                <pre>$ tar -xvzf elements.tar.gz</pre>
+                This will reveal the webpage's files for inspection.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint16-collapse2">
+                Hint 2: Where could the flag be hidden inside the source?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint16-collapse2">
+              <div class="accordion-body">
+                Carefully check:
+                <ul>
+                  <li>HTML comments</li>
+                  <li>Hidden HTML elements (e.g., <code>display:none</code>)</li>
+                  <li>CSS files</li>
+                  <li>JavaScript files</li>
+                  <li>Encoded data like Base64</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint16-collapse3">
+                Hint 3: Are there any encoded or obfuscated parts?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint16-collapse3">
+              <div class="accordion-body">
+                If you spot suspicious strings (e.g., long Base64-like text), try decoding them using <a href="https://www.base64decode.org/" target="_blank">Base64 Decoder</a>.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution16">
+        <strong>Solution:</strong>
+        <p>
+          1. Extract the archive:<br>
+          <pre>$ tar -xvzf elements.tar.gz</pre>
+          2. Open the <code>index.html</code> and other files with a text editor.<br>
+          3. Look for hidden elements, comments, or encoded content.<br>
+          4. If you find Base64 or other suspicious strings, decode them.<br>
+          5. The flag will follow the format:<br>
+          <pre>picoCTF{...}</pre><br>
+          6. Enter this flag in the PicoCTF portal to solve the challenge.<br><br>
+          ✅ The flag is hidden somewhere in the source files, requiring careful manual inspection and possibly decoding.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="static/script.js"></script>
+</body>
+</html>
