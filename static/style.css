@@ -1,0 +1,18 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.challenge-card {
+  margin-bottom: 1.5rem;
+}
+
+pre {
+  background-color: #e9ecef;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.tab-content {
+  display: none;
+}
