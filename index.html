@@ -267,6 +267,104 @@
 
 <div class="card challenge-card shadow-sm">
   <div class="card-body">
+    <h5 class="card-title">Pie Time <span class="badge bg-success text-dark">Binary Exploitation - Easy</span></h5>
+    <p class="card-text">
+      You’ve come across a binary using a security technique known as PIE (Position Independent Executable). Can you overcome it and find the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab14" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab14" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab14" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent14">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints14">
+        <div class="accordion" id="hintAccordion14">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse1">
+                Hint 1: What does PIE mean?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse1">
+              <div class="accordion-body">
+                PIE means the memory addresses within the binary are randomized each time it's run. This makes exploiting it trickier, but not impossible.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse2">
+                Hint 2: How can you figure out addresses when PIE is enabled?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse2">
+              <div class="accordion-body">
+                You can leak addresses at runtime using debugging tools like <code>GDB</code>. Once you know the base address, you can calculate the locations of functions.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse3">
+                Hint 3: How do you confirm the binary uses PIE?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse3">
+              <div class="accordion-body">
+                Run <code>checksec</code> on the binary:<br>
+                <pre>$ checksec pie_time</pre>
+                You’ll see that PIE is enabled if the binary is position independent.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse4">
+                Hint 4: What tools can help you exploit the binary?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint14-collapse4">
+              <div class="accordion-body">
+                Use <code>GDB</code> with <code>pwndbg</code> or <code>gef</code> to analyze memory, leak addresses, and construct your exploit. You may need to calculate the offset for your payload.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution14">
+        <strong>Solution:</strong>
+        <p>
+          1. Run <code>checksec pie_time</code> to confirm PIE is enabled.<br>
+          2. Open the binary with GDB:<br>
+          <pre>$ gdb pie_time</pre>
+          3. Use a format string vulnerability to leak an address at runtime.<br>
+          4. Calculate the PIE base by subtracting known offsets from the leaked address.<br>
+          5. With the base address, compute the location of useful functions or flags.<br>
+          6. Construct your exploit payload accordingly.<br>
+          7. Upon successful exploitation, the binary will reveal the flag.<br><br>
+          ✅ The flag is revealed after exploiting the PIE-protected binary using leaked addresses.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
     <h5 class="card-title">Interencdec <span class="badge bg-success">Cryptography - Easy</span></h5>
     <p class="card-text">
       The flag has been encoded multiple times using different methods. Can you peel back the layers and reveal the hidden flag?
@@ -443,61 +541,62 @@
 
 <div class="card challenge-card shadow-sm">
   <div class="card-body">
-    <h5 class="card-title">unpackme.py <span class="badge bg-success">Reverse Engineering - Easy</span></h5>
+    <h5 class="card-title">Ph4nt0m 1ntrud3r <span class="badge bg-success text-dark">Forensics - Easy</span></h5>
     <p class="card-text">
-      You’ve been given a Python script, but the flag is hidden inside. With a simple tweak, you can unpack its secret. Can you reveal the flag?
+      There’s been an intrusion, but the attacker was stealthy. Can you analyze the evidence and uncover the flag hidden in the shadows?
     </p>
 
-    <ul class="nav nav-tabs" id="challengeTab11" role="tablist">
+    <ul class="nav nav-tabs" id="challengeTab12" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="hints-tab11" type="button">Hints</button>
+        <button class="nav-link" id="hints-tab12" type="button">Hints</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="solution-tab11" type="button">Solution</button>
+        <button class="nav-link" id="solution-tab12" type="button">Solution</button>
       </li>
     </ul>
 
-    <div class="tab-content mt-3" id="challengeTabContent11">
+    <div class="tab-content mt-3" id="challengeTabContent12">
       
       <!-- Hints Tab -->
-      <div class="tab-pane fade" id="hints11">
-        <div class="accordion" id="hintAccordion11">
+      <div class="tab-pane fade" id="hints12">
+        <div class="accordion" id="hintAccordion12">
 
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse1">
-                Hint 1: Did you read the Python source code carefully?
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse1">
+                Hint 1: What type of file were you given?
               </button>
             </h2>
-            <div class="accordion-collapse collapse" id="hint11-collapse1">
+            <div class="accordion-collapse collapse" id="hint12-collapse1">
               <div class="accordion-body">
-                The provided script contains logic that hides the flag using encryption or encoding. Reading the source code will reveal where the flag is handled.
+                You were provided a memory dump file. These often contain remnants of processes, passwords, or even flags that were in memory at the time.
               </div>
             </div>
           </div>
 
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse2">
-                Hint 2: Is the decrypted flag being shown or executed?
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse2">
+                Hint 2: How can you search a memory dump for readable information?
               </button>
             </h2>
-            <div class="accordion-collapse collapse" id="hint11-collapse2">
+            <div class="accordion-collapse collapse" id="hint12-collapse2">
               <div class="accordion-body">
-                Instead of printing the flag, the decrypted content is executed using <code>exec()</code>. You can modify this to display the flag instead.
+                Use the <code>strings</code> command to extract printable text from the dump. Look for anything resembling <code>picoCTF{...}</code>.
               </div>
             </div>
           </div>
 
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse3">
-                Hint 3: What’s the safe way to see the flag?
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse3">
+                Hint 3: What if there are too many strings?
               </button>
             </h2>
-            <div class="accordion-collapse collapse" id="hint11-collapse3">
+            <div class="accordion-collapse collapse" id="hint12-collapse3">
               <div class="accordion-body">
-                Replace <code>exec(plain.decode())</code> with <code>print(plain.decode())</code>. This way, the decrypted flag is displayed instead of executed.
+                You can filter the output with <code>grep</code> to search specifically for the flag format:<br>
+                <pre>$ strings memory_dump | grep pico</pre>
               </div>
             </div>
           </div>
@@ -506,18 +605,16 @@
       </div>
 
       <!-- Solution Tab -->
-      <div class="tab-pane fade" id="solution11">
+      <div class="tab-pane fade" id="solution12">
         <strong>Solution:</strong>
         <p>
-          1. Open <code>unpackme.py</code> in your favorite text editor.<br>
-          2. Find the line:<br>
-          <pre>exec(plain.decode())</pre>
-          3. Replace it with:<br>
-          <pre>print(plain.decode())</pre>
-          4. Run the modified script:<br>
-          <pre>$ python unpackme.py</pre>
-          5. The decrypted flag will be printed to your terminal.<br><br>
-          ✅ The flag is revealed by printing the decrypted payload.
+          1. Run <code>strings</code> on the memory dump file:<br>
+          <pre>$ strings memory_dump | grep pico</pre>
+          2. The flag will appear in the output.<br>
+          3. Example output:<br>
+          <pre>... picoCTF{m3m0ry_r3s1du3_1s_n0t_s3cur3} ...</pre>
+          4. That’s your flag.<br><br>
+          ✅ The flag is hidden within printable strings extracted from the memory dump.
         </p>
       </div>
     </div>
@@ -889,6 +986,89 @@
 
 <div class="card challenge-card shadow-sm">
   <div class="card-body">
+    <h5 class="card-title">unpackme.py <span class="badge bg-warning">Reverse Engineering - Medium</span></h5>
+    <p class="card-text">
+      You’ve been given a Python script, but the flag is hidden inside. With a simple tweak, you can unpack its secret. Can you reveal the flag?
+    </p>
+
+    <ul class="nav nav-tabs" id="challengeTab11" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="hints-tab11" type="button">Hints</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="solution-tab11" type="button">Solution</button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="challengeTabContent11">
+      
+      <!-- Hints Tab -->
+      <div class="tab-pane fade" id="hints11">
+        <div class="accordion" id="hintAccordion11">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse1">
+                Hint 1: Did you read the Python source code carefully?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint11-collapse1">
+              <div class="accordion-body">
+                The provided script contains logic that hides the flag using encryption or encoding. Reading the source code will reveal where the flag is handled.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse2">
+                Hint 2: Is the decrypted flag being shown or executed?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint11-collapse2">
+              <div class="accordion-body">
+                Instead of printing the flag, the decrypted content is executed using <code>exec()</code>. You can modify this to display the flag instead.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint11-collapse3">
+                Hint 3: What’s the safe way to see the flag?
+              </button>
+            </h2>
+            <div class="accordion-collapse collapse" id="hint11-collapse3">
+              <div class="accordion-body">
+                Replace <code>exec(plain.decode())</code> with <code>print(plain.decode())</code>. This way, the decrypted flag is displayed instead of executed.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Solution Tab -->
+      <div class="tab-pane fade" id="solution11">
+        <strong>Solution:</strong>
+        <p>
+          1. Open <code>unpackme.py</code> in your favorite text editor.<br>
+          2. Find the line:<br>
+          <pre>exec(plain.decode())</pre>
+          3. Replace it with:<br>
+          <pre>print(plain.decode())</pre>
+          4. Run the modified script:<br>
+          <pre>$ python unpackme.py</pre>
+          5. The decrypted flag will be printed to your terminal.<br><br>
+          ✅ The flag is revealed by printing the decrypted payload.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card challenge-card shadow-sm">
+  <div class="card-body">
     <h5 class="card-title">Reverse <span class="badge bg-warning text-dark">Reverse Engineering - Medium</span></h5>
     <p class="card-text">
       You’ve been given a mysterious executable file. Can you dig through its contents to reveal the hidden flag?
@@ -962,88 +1142,6 @@
           <pre>2048 Password correct, please see flag: picoCTF{...}</pre>
           4. That’s your flag.<br><br>
           ✅ The flag is present in the <code>strings</code> output.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card challenge-card shadow-sm">
-  <div class="card-body">
-    <h5 class="card-title">Ph4nt0m 1ntrud3r <span class="badge bg-warning text-dark">Forensics - Medium</span></h5>
-    <p class="card-text">
-      There’s been an intrusion, but the attacker was stealthy. Can you analyze the evidence and uncover the flag hidden in the shadows?
-    </p>
-
-    <ul class="nav nav-tabs" id="challengeTab12" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="hints-tab12" type="button">Hints</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="solution-tab12" type="button">Solution</button>
-      </li>
-    </ul>
-
-    <div class="tab-content mt-3" id="challengeTabContent12">
-      
-      <!-- Hints Tab -->
-      <div class="tab-pane fade" id="hints12">
-        <div class="accordion" id="hintAccordion12">
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse1">
-                Hint 1: What type of file were you given?
-              </button>
-            </h2>
-            <div class="accordion-collapse collapse" id="hint12-collapse1">
-              <div class="accordion-body">
-                You were provided a memory dump file. These often contain remnants of processes, passwords, or even flags that were in memory at the time.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse2">
-                Hint 2: How can you search a memory dump for readable information?
-              </button>
-            </h2>
-            <div class="accordion-collapse collapse" id="hint12-collapse2">
-              <div class="accordion-body">
-                Use the <code>strings</code> command to extract printable text from the dump. Look for anything resembling <code>picoCTF{...}</code>.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint12-collapse3">
-                Hint 3: What if there are too many strings?
-              </button>
-            </h2>
-            <div class="accordion-collapse collapse" id="hint12-collapse3">
-              <div class="accordion-body">
-                You can filter the output with <code>grep</code> to search specifically for the flag format:<br>
-                <pre>$ strings memory_dump | grep pico</pre>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Solution Tab -->
-      <div class="tab-pane fade" id="solution12">
-        <strong>Solution:</strong>
-        <p>
-          1. Run <code>strings</code> on the memory dump file:<br>
-          <pre>$ strings memory_dump | grep pico</pre>
-          2. The flag will appear in the output.<br>
-          3. Example output:<br>
-          <pre>... picoCTF{m3m0ry_r3s1du3_1s_n0t_s3cur3} ...</pre>
-          4. That’s your flag.<br><br>
-          ✅ The flag is hidden within printable strings extracted from the memory dump.
         </p>
       </div>
     </div>
@@ -1138,104 +1236,6 @@
           4. Alternatively, use a graphical tool like ChromeCacheView to inspect cache entries.<br>
           5. The flag will appear hidden in one of the cached files.<br><br>
           ✅ Example flag format: <code>picoCTF{c4ch3_4na1y515_m4tt3r5}</code>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card challenge-card shadow-sm">
-  <div class="card-body">
-    <h5 class="card-title">Pie Time <span class="badge bg-warning text-dark">Binary Exploitation - Medium</span></h5>
-    <p class="card-text">
-      You’ve come across a binary using a security technique known as PIE (Position Independent Executable). Can you overcome it and find the flag?
-    </p>
-
-    <ul class="nav nav-tabs" id="challengeTab14" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="hints-tab14" type="button">Hints</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="solution-tab14" type="button">Solution</button>
-      </li>
-    </ul>
-
-    <div class="tab-content mt-3" id="challengeTabContent14">
-      
-      <!-- Hints Tab -->
-      <div class="tab-pane fade" id="hints14">
-        <div class="accordion" id="hintAccordion14">
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse1">
-                Hint 1: What does PIE mean?
-              </button>
-            </h2>
-            <div class="accordion-collapse collapse" id="hint14-collapse1">
-              <div class="accordion-body">
-                PIE means the memory addresses within the binary are randomized each time it's run. This makes exploiting it trickier, but not impossible.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse2">
-                Hint 2: How can you figure out addresses when PIE is enabled?
-              </button>
-            </h2>
-            <div class="accordion-collapse collapse" id="hint14-collapse2">
-              <div class="accordion-body">
-                You can leak addresses at runtime using debugging tools like <code>GDB</code>. Once you know the base address, you can calculate the locations of functions.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse3">
-                Hint 3: How do you confirm the binary uses PIE?
-              </button>
-            </h2>
-            <div class="accordion-collapse collapse" id="hint14-collapse3">
-              <div class="accordion-body">
-                Run <code>checksec</code> on the binary:<br>
-                <pre>$ checksec pie_time</pre>
-                You’ll see that PIE is enabled if the binary is position independent.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hint14-collapse4">
-                Hint 4: What tools can help you exploit the binary?
-              </button>
-            </h2>
-            <div class="accordion-collapse collapse" id="hint14-collapse4">
-              <div class="accordion-body">
-                Use <code>GDB</code> with <code>pwndbg</code> or <code>gef</code> to analyze memory, leak addresses, and construct your exploit. You may need to calculate the offset for your payload.
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Solution Tab -->
-      <div class="tab-pane fade" id="solution14">
-        <strong>Solution:</strong>
-        <p>
-          1. Run <code>checksec pie_time</code> to confirm PIE is enabled.<br>
-          2. Open the binary with GDB:<br>
-          <pre>$ gdb pie_time</pre>
-          3. Use a format string vulnerability to leak an address at runtime.<br>
-          4. Calculate the PIE base by subtracting known offsets from the leaked address.<br>
-          5. With the base address, compute the location of useful functions or flags.<br>
-          6. Construct your exploit payload accordingly.<br>
-          7. Upon successful exploitation, the binary will reveal the flag.<br><br>
-          ✅ The flag is revealed after exploiting the PIE-protected binary using leaked addresses.
         </p>
       </div>
     </div>
